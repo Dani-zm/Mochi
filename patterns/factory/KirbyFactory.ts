@@ -13,10 +13,6 @@ export class KirbyFactory implements IMascotaFactory {
     return "Mascota inicial.";
   }
 
-  getNivelDesbloqueo(): number {
-    return 1;
-  }
-
   getSpriteFolder(): string {
     return "kirby";
   }

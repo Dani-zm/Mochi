@@ -13,10 +13,6 @@ export class MikuFactory implements IMascotaFactory {
     return "Cantante virtual";
   }
 
-  getNivelDesbloqueo(): number {
-    return 10;
-  }
-
   getSpriteFolder(): string {
     return "miku";
   }

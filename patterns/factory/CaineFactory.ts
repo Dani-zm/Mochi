@@ -13,10 +13,6 @@ export class CaineFactory implements IMascotaFactory {
     return "IA del Circo Digital.";
   }
 
-  getNivelDesbloqueo(): number {
-    return 15;
-  }
-
   getSpriteFolder(): string {
     return "caine";
   }

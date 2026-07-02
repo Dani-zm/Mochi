@@ -13,10 +13,6 @@ export class AyakaFactory implements IMascotaFactory {
     return "Personaje desbloqueable.";
   }
 
-  getNivelDesbloqueo(): number {
-    return 5;
-  }
-
   getSpriteFolder(): string {
     return "ayaka";
   }
