@@ -28,10 +28,10 @@ export default function PerfilScreen() {
 
   return (
     <ScrollView className="flex-1 bg-[#FFFF]">
-      <View className="bg-[#F297A0] flex-row justify-between items-center px-6 pt-14 pb-4 ">
+      <View className="bg-[#F297A0] flex-row justify-between items-center px-6 pt-4 pb-4 ">
         <View>
           <Text className="text-2xl font-bold text-[#ffffff]">⋆˖ Mochi ˖⋆</Text>
-          <Text className="text-sm text-[#F3EBD8]">
+          <Text className="text-sm text-[#ffffff]">
             {saludo}, {usuarioNombre}!
           </Text>
         </View>

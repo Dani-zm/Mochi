@@ -15,7 +15,6 @@ import { useAuth } from "../../context/AuthContext";
 import { obtenerTodasMascotas } from "../../services/mascota.service";
 import { FactoryProvider } from "../../patterns/factory/FactoryProvider";
 
-// Imágenes estáticas de preview (idle shime1 de cada mascota)
 const PREVIEW: Record<string, any> = {
   kirby: require("../../assets/mascotas/kirby/shime1.png"),
   ayaka: require("../../assets/mascotas/ayaka/shime1.png"),
@@ -51,7 +50,7 @@ export default function MascotasScreen() {
   }
 
   async function handleSeleccionar(m: any) {
-    if (m.id === mascotaActivaId) return; // ya activa
+    if (m.id === mascotaActivaId) return; 
     Alert.alert(
       `Elegir a ${m.nombre}`,
       `¿Quieres que ${m.nombre} sea tu mascota activa?`,
@@ -66,12 +65,12 @@ export default function MascotasScreen() {
               await cargar();
               Alert.alert(
                 "¡Mascota cambiada!",
-                `Ahora ${m.nombre} es tu mascota activa.`,
+                `Ahora ${m.nombre} es tu mascota activa`,
               );
             } catch (e: any) {
               Alert.alert(
                 "Error",
-                e.message ?? "No se pudo cambiar la mascota.",
+                e.message ?? "No se pudo cambiar la mascota",
               );
             }
           },
@@ -83,10 +82,10 @@ export default function MascotasScreen() {
   return (
     <ScrollView className="flex-1 bg-[#FFFF]">
       {/* Cabecera */}
-      <View className="bg-[#F297A0] flex-row justify-between items-center px-6 pt-14 pb-4 mb-6">
+      <View className="bg-[#F297A0] flex-row justify-between items-center px-6 pt-4 pb-4 mb-6">
         <View>
           <Text className="text-2xl font-bold text-[#ffffff]">⋆˖ Mochi ˖⋆</Text>
-          <Text className="text-sm text-[#F3EBD8]">
+          <Text className="text-sm text-[#ffffff]">
             {saludo}, {usuarioNombre}!
           </Text>
         </View>

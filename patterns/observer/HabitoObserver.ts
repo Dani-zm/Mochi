@@ -2,7 +2,7 @@
 // PATRÓN OBSERVADOR aplicado a Mochi
 // Cuando el usuario completa un hábito, el "sujeto" notifica
 // a todos sus observadores: la mascota sube XP, sube felicidad
-// y puede cambiar de animación automáticamente.
+// y puede cambiar de animación automáticamente
 // =============================================================
 
 export interface IObservador {
@@ -39,7 +39,8 @@ export class HabitoSujeto {
 export class ObservadorXP implements IObservador {
   actualizar(evento: string, datos: any) {
     if (evento === "HABITO_COMPLETADO") {
-      const xp = datos.prioridad === "Alta" ? 50 : datos.prioridad === "Media" ? 35 : 20;
+      const xp =
+        datos.prioridad === "Alta" ? 50 : datos.prioridad === "Media" ? 35 : 20;
       console.log(`[XP] La mascota ganó +${xp} XP`);
     }
   }
@@ -48,7 +49,8 @@ export class ObservadorXP implements IObservador {
 export class ObservadorFelicidad implements IObservador {
   actualizar(evento: string, datos: any) {
     if (evento === "HABITO_COMPLETADO") {
-      const fel = datos.prioridad === "Alta" ? 15 : datos.prioridad === "Media" ? 7 : 3;
+      const fel =
+        datos.prioridad === "Alta" ? 15 : datos.prioridad === "Media" ? 7 : 3;
       console.log(`[Felicidad] La mascota ganó +${fel} de felicidad`);
     }
   }

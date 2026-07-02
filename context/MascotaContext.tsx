@@ -30,9 +30,9 @@ export type EstadoAnimacion =
 interface MascotaContextType {
   mascota: any;
   estadoAnimacion: EstadoAnimacion;
-  habitosCompletados: number; // contado desde historial, no columna DB
-  rachaActual: number; // calculada dinámicamente desde historial
-  mejorRacha: number; // calculada dinámicamente desde historial
+  habitosCompletados: number; 
+  rachaActual: number; 
+  mejorRacha: number; 
   cargarMascota: () => Promise<void>;
   subirXP: (cantidad: number) => Promise<void>;
   cambiarVida: (valor: number) => Promise<void>;

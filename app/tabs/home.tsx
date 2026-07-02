@@ -192,15 +192,15 @@ export default function HomeScreen() {
   return (
     <ScrollView ref={scrollRef} className="flex-1 bg-[#ffff]">
       <StatusBar
-        barStyle="dark-content" // Hace que los íconos (hora, batería) sean oscuros
-        backgroundColor="#fff" // Hace el fondo transparente en Android
-        translucent={true} // Permite que la app se dibuje detrás de la barra de estado
+        barStyle="dark-content" 
+        backgroundColor="#fff" 
+        translucent={true} 
       />
       {/* ─── Cabecera ─────────────────────────────────────────────────── */}
-      <View className="bg-[#F297A0] flex-row justify-between items-center px-6 pt-14 pb-4 ">
+      <View className="bg-[#F297A0] flex-row justify-between items-center px-6 pt-4 pb-4 ">
         <View>
           <Text className="text-2xl font-bold text-[#ffffff]">⋆˖ Mochi ˖⋆</Text>
-          <Text className="text-sm text-[#F3EBD8]">
+          <Text className="text-sm text-[#ffff]">
             {saludo}, {usuarioNombre}!
           </Text>
         </View>

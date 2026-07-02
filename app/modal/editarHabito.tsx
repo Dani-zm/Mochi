@@ -120,38 +120,38 @@ export default function EditarHabitoScreen() {
               <TouchableOpacity
                 key={habito.id}
                 onPress={() => selectHabito(habito)}
-                className={`bg-white p-4 rounded-2xl mb-3 border flex-row justify-between items-center shadow-sm ${
+                className={`bg-white pl-3 pb-4 pr-4 pt-2 rounded-2xl mb-3 border-3 flex-row justify-between items-center ${
                   completado ? "border-[#B6BB79]" : "border-[#FFEBEB]"
                 }`}
               >
-                <View className="flex-1 pr-4">
-                  <View className="flex-row items-center gap-2 mb-0.5">
-                    <Text
-                      className="text-[10px] font-bold"
-                      style={{
-                        color: colorPrioridad(habito.prioridad ?? "Baja"),
-                      }}
-                    >
-                      {habito.prioridad || "Normal"}
-                    </Text>
-                    {completado && (
-                      <Text className="text-[10px] font-bold text-[#B6BB79]">
-                        ✓ Completado
-                      </Text>
-                    )}
-                  </View>
-                  <Text className={`text-sm font-bold ${
-                    completado ? "text-[#B6BB79] line-through" : "text-[#4A3E3D]"
-                  }`}>
-                    {habito.titulo}
+                <View className="flex-1 pr-3">
+                  <Text
+                    className="text-[12px] font-bold mb-1"
+                    style={{
+                      color: colorPrioridad(habito.prioridad ?? "Baja"),
+                    }}
+                  >
+                    {habito.prioridad || "Normal"}
                   </Text>
-                  {habito.descripcion ? (
-                    <Text className="text-xs text-[#7A6F62] mt-0.5">
-                      {habito.descripcion}
+                  {completado && (
+                    <Text className="text-[12px] font-bold text-[#B6BB79] mb-1">
+                      ✓ Completado
                     </Text>
-                  ) : null}
+                  )}
+                  <View className="pl-5">
+                    <Text className={`text-sm font-bold ${
+                      completado ? "text-[#B6BB79] line-through" : "text-[#4A3E3D]"
+                    }`}>
+                      {habito.titulo}
+                    </Text>
+                    {habito.descripcion ? (
+                      <Text className="text-xs text-[#7A6F62] mt-0.5">
+                        {habito.descripcion}
+                      </Text>
+                    ) : null}
+                  </View>
                 </View>
-                <Ionicons name="chevron-forward" size={18} color="#A39A90" />
+                <Ionicons name="chevron-forward" size={22} color="#A39A90" />
               </TouchableOpacity>
               );
             })
