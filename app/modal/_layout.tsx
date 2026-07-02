@@ -1,0 +1,10 @@
+import { Stack } from "expo-router";
+
+export default function ModalLayout() {
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="agregarHabito" options={{ presentation: "modal" }} />
+      <Stack.Screen name="editarHabito" options={{ presentation: "modal" }} />
+    </Stack>
+  );
+}

@@ -1,24 +1,54 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import React, { useEffect } from "react";
+import { Stack, useRouter, useSegments } from "expo-router";
+import { AuthProvider, useAuth } from "../context/AuthContext";
+import "@/global.css";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+function RootLayoutNav() {
+  const { user, loading } = useAuth();
+  const segments = useSegments() as string[];
+  const router = useRouter();
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+  useEffect(() => {
+    if (loading) return;
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+    const inAuthGroup = segments[0] === "auth";
+
+    if (!user && !inAuthGroup) {
+      // Redirigir a login si no hay usuario y no estamos en auth
+      router.replace("/auth/login" as any);
+    } else if (user && inAuthGroup) {
+      // Redirigir a pestañas principales si hay usuario y estamos en auth
+      router.replace("/tabs/home" as any);
+    } else if (user && segments.length === 0) {
+      // Si estamos en la raíz y hay usuario, ir a home
+      router.replace("/tabs/home" as any);
+    } else if (!user && segments.length === 0) {
+      // Si estamos en la raíz y no hay usuario, ir a login
+      router.replace("/auth/login" as any);
+    }
+  }, [user, loading, segments]);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="auth" />
+      <Stack.Screen name="tabs" />
+      <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+    </Stack>
   );
 }
+
+import { MascotaProvider } from "../context/MascotaContext";
+import { HabitosProvider } from "../context/HabitosContext";
+
+export default function RootLayout() {
+  return (
+    <AuthProvider>
+      <MascotaProvider>
+        <HabitosProvider>
+          <RootLayoutNav />
+        </HabitosProvider>
+      </MascotaProvider>
+    </AuthProvider>
+  );
+}
+
