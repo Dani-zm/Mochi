@@ -11,15 +11,15 @@ describe("sprite.service", () => {
       expect(obtenerVelocidadFrame("IDLE")).toBe(1800);
     });
 
-    it("retorna 500 para CELEBRATE", () => {
-      expect(obtenerVelocidadFrame("CELEBRATE")).toBe(500);
+    it("retorna 350 para CELEBRATE", () => {
+      expect(obtenerVelocidadFrame("CELEBRATE")).toBe(350);
     });
 
-    it("retorna 650 para otros estados", () => {
-      expect(obtenerVelocidadFrame("HAPPY")).toBe(650);
-      expect(obtenerVelocidadFrame("CRY")).toBe(650);
-      expect(obtenerVelocidadFrame("SLEEP")).toBe(650);
-      expect(obtenerVelocidadFrame("TOUCH")).toBe(650);
+    it("retorna 400 para otros estados", () => {
+      expect(obtenerVelocidadFrame("HAPPY")).toBe(400);
+      expect(obtenerVelocidadFrame("CRY")).toBe(400);
+      expect(obtenerVelocidadFrame("SLEEP")).toBe(400);
+      expect(obtenerVelocidadFrame("TOUCH")).toBe(400);
     });
   });
 

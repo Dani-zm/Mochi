@@ -17,6 +17,7 @@ import {
   calcularRachas,
 } from "../services/mascota.service";
 import { useAuth } from "./AuthContext";
+import { obtenerDuracionAnimacion } from "../services/sprite.service";
 
 export type EstadoAnimacion =
   | "IDLE"
@@ -126,7 +127,7 @@ export function MascotaProvider({ children }: { children: ReactNode }) {
     // Contar habitos localmente
     setHabitosCompletados((n) => n + 1);
 
-    if (levelUp) setAnimacion("CELEBRATE", 5000);
+    if (levelUp) setAnimacion("CELEBRATE", obtenerDuracionAnimacion(mascota?.mascota?.nombre ?? "Kirby", "CELEBRATE"));
   }
 
   async function cambiarVida(valor: number) {
@@ -187,7 +188,8 @@ export function MascotaProvider({ children }: { children: ReactNode }) {
     const data = await seleccionarMascotaService(user.id, mascotaId);
     setMascota(data);
     await cargarMascota();
-    setAnimacion("HAPPY", 3000);
+    const nombreMascota = data?.mascota?.nombre ?? "Kirby";
+    setAnimacion("HAPPY", obtenerDuracionAnimacion(nombreMascota, "HAPPY"));
   }
 
   function setAnimacion(estado: EstadoAnimacion, duracionMs = 3000) {

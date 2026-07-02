@@ -28,6 +28,7 @@ import {
   obtenerVelocidadFrame,
   obtenerEstadoEfectivo,
   obtenerMensajeEstado,
+  obtenerDuracionAnimacion,
 } from "../../services/sprite.service";
 
 // Sujeto Observer (singleton de la pantalla)
@@ -80,7 +81,9 @@ export default function HomeScreen() {
   const frameSpeed = obtenerVelocidadFrame(estadoAnimacion);
 
   useEffect(() => {
-    setFrameIdx(0);
+    if (estadoAnimacion !== "IDLE") {
+      setFrameIdx(0);
+    }
   }, [estadoAnimacion, petKey]);
 
   // Frames efectivos: si vida <= 0 o felicidad baja → CRY
@@ -115,7 +118,8 @@ export default function HomeScreen() {
 
   // ── Tocar mascota → animación aleatoria ──────────────────────────────────
   const handleTocarMascota = () => {
-    setAnimacion(obtenerAnimacionAleatoria(), 3000);
+    const anim = obtenerAnimacionAleatoria();
+    setAnimacion(anim, obtenerDuracionAnimacion(mascotaNombre, anim));
   };
 
   // ── Toggle de hábito: si ya está completado → desmarcar con CRY ──────────
@@ -140,7 +144,7 @@ export default function HomeScreen() {
       } catch (e) {
         console.error(e);
       }
-      setAnimacion("CRY", 3000);
+      setAnimacion("CRY", obtenerDuracionAnimacion(mascotaNombre, "CRY"));
       scrollRef.current?.scrollTo({ y: 0, animated: true });
     } else {
       // Completar: Patrón Estrategia
@@ -167,7 +171,7 @@ export default function HomeScreen() {
 
       // Patrón Observer
       habitoSujeto.completarHabito(habito.id, habito.prioridad ?? "Baja");
-      setAnimacion("HAPPY", 5000);
+      setAnimacion("HAPPY", obtenerDuracionAnimacion(mascotaNombre, "HAPPY"));
       scrollRef.current?.scrollTo({ y: 0, animated: true });
     }
   };
@@ -179,7 +183,7 @@ export default function HomeScreen() {
   });
 
   const colorPrioridad = (p: string) =>
-    p === "Alta" ? "#E25C80" : p === "Media" ? "#F4A261" : "#5A4341";
+    p === "Alta" ? "#F297A0" : p === "Media" ? "#eeafbd" : "#eeafbd92";
 
   const totalHoy = habitos.length;
   const completadosHoy = habitos.filter((h) => h.completado_hoy).length;
@@ -214,7 +218,7 @@ export default function HomeScreen() {
         <Text className="text-2xl font-black text-[#F297A0]">
           {mascotaNombre}
         </Text>
-        <Text className="text-sm text-[#FFB7B7] mb-3">
+        <Text className="text-[16px] font-semibold text-[#FFB7B7] mb-3">
           {obtenerMensajeEstado(estadoEfectivo, vida, felicidad)}
         </Text>
 
@@ -233,7 +237,7 @@ export default function HomeScreen() {
               <Text className="text-[12px] text-[#F297A0] font-semibold">
                 ♡ Vida
               </Text>
-              <Text className="text-[12px] text-[#E25C80] font-bold">
+              <Text className="text-[12px] text-[#F297A0] font-bold">
                 {vida}%
               </Text>
             </View>
@@ -242,7 +246,7 @@ export default function HomeScreen() {
                 className="h-full"
                 style={{
                   width: `${vida}%`,
-                  backgroundColor: vida < 30 ? "#E25C80" : "#F297A0",
+                  backgroundColor: vida < 30 ? "#F297A0" : "#F297A0",
                 }}
               />
             </View>

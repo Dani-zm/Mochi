@@ -265,8 +265,21 @@ export function obtenerAnimacionAleatoria(): EstadoAnimacion {
 
 export function obtenerVelocidadFrame(estado: EstadoAnimacion): number {
   if (estado === "IDLE") return 1800;
-  if (estado === "CELEBRATE") return 500;
-  return 650;
+  if (estado === "CELEBRATE") return 350;
+  return 400;
+}
+
+export function obtenerDuracionAnimacion(
+  mascotaNombre: string,
+  estado: EstadoAnimacion,
+  repeticiones = 2
+): number {
+  const factory = FactoryProvider.crear(mascotaNombre);
+  const petKey = factory.getSpriteFolder() as keyof typeof FRAMES;
+  const frames = FRAMES[petKey]?.[estado] ?? [];
+  if (frames.length === 0) return 3000;
+  const velocidad = obtenerVelocidadFrame(estado);
+  return frames.length * velocidad * repeticiones;
 }
 
 export function obtenerEstadoEfectivo(

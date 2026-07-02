@@ -127,14 +127,14 @@ export default function MascotasScreen() {
               >
                 {/* Badge de activa */}
                 {esActiva && (
-                  <View className="absolute top-2 right-2 bg-[#F297A0] rounded-full px-2 py-0.5">
+                  <View className="absolute top-1 right-2 bg-[#F297A0] rounded-full px-2 py-0.5">
                     <Text className="text-white text-[10px] font-bold">
                       Activa ♥
                     </Text>
                   </View>
                 )}
 
-                <Text className="text-lg font-bold text-[#F297A0] mb-2">
+                <Text className="text-lg font-bold text-[#F297A0] mb-2 mt-2 ">
                   {m.nombre}
                 </Text>
                 <Image

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Alert } from "../../utils/Alert";
 import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import AuthService from "../../services/auth.service";
 
 export default function RegisterScreen() {
@@ -17,6 +18,8 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleRegister = async () => {
     if (!nombre || !email || !password || !confirmPassword) {
@@ -31,7 +34,7 @@ export default function RegisterScreen() {
 
     setLoading(true);
     try {
-      await AuthService.register(nombre, email, password);
+      await AuthService.register(nombre.trim(), email.trim(), password.trim());
 
       Alert.alert(
         "Registro exitoso",
@@ -55,7 +58,7 @@ export default function RegisterScreen() {
       className="bg-[#ffffff]"
     >
       <View className="flex-1 justify-center px-8 py-12">
-        <View className="bg-[#FFEBEB] p-6 rounded-3xl border border-[#F297A0] shadow-2xl">
+        <View className="bg-[#ffffff] p-6 rounded-3xl border border-[#F297A0] shadow-2xl">
           <Text className="text-4xl font-black text-center text-[#311917] mb-2">
             ⋆˖ Mochi ˖⋆
           </Text>
@@ -68,7 +71,7 @@ export default function RegisterScreen() {
             placeholderTextColor="#988281"
             value={nombre}
             onChangeText={setNombre}
-            className="bg-[#FFEBEB] text-[#5A4341] px-4 py-3 rounded-xl mb-4 border border-[#F7B9BE] focus:border-[#F297A0]"
+            className="bg-[#ffffff] text-[#5A4341] px-4 py-3 rounded-xl mb-4 border border-[#F7B9BE] focus:border-[#F297A0]"
           />
 
           <TextInput
@@ -78,28 +81,52 @@ export default function RegisterScreen() {
             onChangeText={setEmail}
             autoCapitalize="none"
             keyboardType="email-address"
-            className="bg-[#FFEBEB] text-[#5A4341] px-4 py-3 rounded-xl mb-4 border border-[#F7B9BE] focus:border-[#F297A0]"
+            className="bg-[#ffffff] text-[#5A4341] px-4 py-3 rounded-xl mb-4 border border-[#F7B9BE] focus:border-[#F297A0]"
           />
 
-          <TextInput
-            placeholder="Contraseña"
-            placeholderTextColor="#988281"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            autoCapitalize="none"
-            className="bg-[#FFEBEB] text-[#5A4341] px-4 py-3 rounded-xl mb-4 border border-[#F7B9BE] focus:border-[#F297A0]"
-          />
+          <View className="relative mb-4">
+            <TextInput
+              placeholder="Contraseña"
+              placeholderTextColor="#988281"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}
+              autoCapitalize="none"
+              className="bg-[#ffffff] text-[#5A4341] px-4 py-3 rounded-xl border border-[#F7B9BE] focus:border-[#F297A0]"
+            />
+            <TouchableOpacity
+              onPress={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-3"
+            >
+              <Ionicons
+                name={showPassword ? "eye-off" : "eye"}
+                size={20}
+                color="#5A4341"
+              />
+            </TouchableOpacity>
+          </View>
 
-          <TextInput
-            placeholder="Confirmar contraseña"
-            placeholderTextColor="#988281"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry
-            autoCapitalize="none"
-            className="bg-[#FFEBEB] text-[#5A4341] px-4 py-3 rounded-xl mb-6 border border-[#F7B9BE] focus:border-[#F297A0]"
-          />
+          <View className="relative mb-6">
+            <TextInput
+              placeholder="Confirmar contraseña"
+              placeholderTextColor="#988281"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              secureTextEntry={!showConfirm}
+              autoCapitalize="none"
+              className="bg-[#ffffff] text-[#5A4341] px-4 py-3 rounded-xl border border-[#F7B9BE] focus:border-[#F297A0]"
+            />
+            <TouchableOpacity
+              onPress={() => setShowConfirm(!showConfirm)}
+              className="absolute right-3 top-3"
+            >
+              <Ionicons
+                name={showConfirm ? "eye-off" : "eye"}
+                size={20}
+                color="#5A4341"
+              />
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity
             onPress={handleRegister}
